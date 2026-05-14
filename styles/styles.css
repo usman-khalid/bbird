@@ -107,9 +107,8 @@ a:hover {
 }
 
 /* buttons */
-p.button-wrapper {
-  margin: 12px 0;
-  display: inline;
+p.button-container {
+  margin: 1rem 0;
 }
 
 a.button:any-link,
@@ -118,63 +117,91 @@ button.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0 8px 0 0;
-  border: 0.5px solid var(--border-3);
-  border-radius: 4px;
-  padding: 6px 14px;
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 400;
+  margin: 0 10px 8px 0;
+  border: 1px solid var(--border-3);
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
   line-height: 1.25;
+  letter-spacing: 0.01em;
   text-decoration: none;
   cursor: pointer;
-  color: var(--fg-3);
-  background: transparent;
+  color: var(--fg);
+  background: var(--bg-3);
   transition: all 0.15s ease;
 }
 
 a.button:any-link:hover,
 button.button:hover {
   color: var(--fg);
-  border-color: var(--fg-3);
+  background: var(--bg-2);
+  border-color: var(--fg-4);
 }
 
-a.button.primary,
+/* Primary  filled accent */
+a.button.primary:any-link,
 button.button.primary {
   border-color: var(--accent);
   background-color: var(--accent);
-  color: var(--fg);
+  color: #fff;
 }
 
-a.button.primary:hover,
+a.button.primary:any-link:hover,
 button.button.primary:hover {
   background-color: var(--link-hover-color);
   border-color: var(--link-hover-color);
 }
 
-a.button.secondary,
+/* Secondary  outlined */
+a.button.secondary:any-link,
 button.button.secondary {
   border-color: var(--border-3);
   background-color: transparent;
   color: var(--fg-2);
 }
 
-a.button.secondary:hover,
+a.button.secondary:any-link:hover,
 button.button.secondary:hover {
-  border-color: var(--fg-3);
+  border-color: var(--fg-4);
   color: var(--fg);
 }
 
-a.button.accent,
+/* Accent  tinted */
+a.button.accent:any-link,
 button.button.accent {
   border-color: var(--accent);
   background-color: rgba(184, 92, 28, 0.12);
   color: var(--accent);
 }
 
-a.button.accent:hover,
+a.button.accent:any-link:hover,
 button.button.accent:hover {
   background-color: var(--accent);
+  color: #fff;
+}
+
+/* When two buttons are side by side, first is primary, second is secondary */
+p.button-container:first-of-type a.button:any-link {
+  border-color: var(--accent);
+  background-color: var(--accent);
+  color: #fff;
+}
+
+p.button-container:first-of-type a.button:any-link:hover {
+  background-color: var(--link-hover-color);
+  border-color: var(--link-hover-color);
+}
+
+p.button-container + p.button-container a.button:any-link {
+  border-color: var(--border-3);
+  background-color: transparent;
+  color: var(--fg-2);
+}
+
+p.button-container + p.button-container a.button:any-link:hover {
+  border-color: var(--fg-4);
   color: var(--fg);
 }
 
