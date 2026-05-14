@@ -1,0 +1,81 @@
+/* ============================================================
+   team-grid block
+   Variants:
+     .team-grid           full profile cards in a 2-col grid
+     .team-grid.compact   avatar-only row with "+N" overflow
+   ============================================================ */
+
+/* Full profile grid
+   ------------------------------------------------------------ */
+.team-grid .team-members {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.team-grid .team-member {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.team-grid .team-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.team-grid .team-info h3 {
+  font-size: 16px;
+  margin: 0 0 2px;
+  color: var(--fg);
+}
+
+.team-grid .team-role {
+  font-size: 12px;
+  color: var(--fg-3);
+  font-family: var(--mono);
+  margin: 0 0 8px;
+}
+
+.team-grid .team-bio {
+  font-size: 13px;
+  color: var(--fg-3);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Compact variant
+   ------------------------------------------------------------ */
+.team-grid.compact .team-avatars {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.team-grid .team-avatar.compact {
+  width: 48px;
+  height: 48px;
+  font-size: 16px;
+}
+
+.team-grid .team-overflow {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--fg-4);
+  margin-left: 4px;
+}
+
+/* Mobile
+   ------------------------------------------------------------ */
+@media (max-width: 720px) {
+  .team-grid .team-members {
+    grid-template-columns: 1fr;
+  }
+}

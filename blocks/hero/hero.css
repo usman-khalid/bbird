@@ -1,37 +1,97 @@
+/* Hero block  dark, compact, kicker pattern */
+
+.hero-container {
+  background: none;
+}
+
 .hero-container .hero-wrapper {
-  max-width: unset;
-  padding: 0;
+  max-width: var(--section-max-width, 980px);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2.5rem;
 }
 
-.hero {
-  position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+/* Kicker: the <em> inside a leading <p> */
+.hero p em {
+  display: block;
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--fg-4);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 0.5rem;
 }
 
+/* Headings */
 .hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+  font-size: var(--heading-font-size-xxl, 32px);
+  line-height: 1.1;
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: -0.4px;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
 }
 
-.hero picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+.hero h2 {
+  font-size: 22px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: -0.3px;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
 }
 
-.hero img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
+/* Body text paragraphs (exclude button-container) */
+.hero p:not(.button-container) {
+  font-size: 15px;
+  color: var(--fg-2);
+  line-height: 1.6;
+  max-width: 540px;
+  margin: 0.75rem 0 1rem;
 }
 
-@media (width >= 900px) {
-  .hero {
-    padding: 40px 32px;
+/* Button container */
+.hero .button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+
+/* Ghost buttons  override all EDS defaults */
+.hero a.button,
+.hero a.button:any-link {
+  display: inline-block;
+  background: transparent;
+  border: 0.5px solid var(--border-3);
+  color: var(--fg-3);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  /* reset EDS pill / filled styles */
+  min-width: unset;
+  box-shadow: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.hero a.button:hover,
+.hero a.button:focus {
+  background: transparent;
+  border-color: var(--fg-3);
+  color: var(--fg);
+  text-decoration: none;
+}
+
+/* Mobile */
+@media (max-width: 720px) {
+  .hero h1 {
+    font-size: 26px;
   }
 }

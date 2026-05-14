@@ -1,0 +1,59 @@
+/* Blackbird  brand tokens
+   Source: cheery-vacherin-d67210.netlify.app */
+
+:root {
+  /* surfaces */
+  --bg:        #0a0a0a;
+  --bg-2:      #0f0f0f;
+  --bg-3:      #141414;
+  --border:    #1a1a1a;
+  --border-2:  #1f1f1f;
+  --border-3:  #2a2a2a;
+
+  /* text */
+  --fg:        #ededed;
+  --fg-2:      #aaa;
+  --fg-3:      #888;
+  --fg-4:      #666;
+  --fg-5:      #555;
+
+  /* accents */
+  --accent:    #b85c1c;
+  --accent-2:  #d4537e;   /* pink  case studies */
+  --accent-3:  #1d9e75;   /* teal  field notes */
+  --accent-4:  #378add;   /* blue  tutorials */
+  --accent-5:  #534ab7;   /* purple */
+  --accent-6:  #639922;   /* green */
+
+  /* EDS standard tokens (mapped) */
+  --background-color: var(--bg);
+  --light-color:      var(--bg-2);
+  --dark-color:       var(--bg-3);
+  --text-color:       var(--fg);
+  --link-color:       var(--accent);
+  --link-hover-color: #d4711f;
+
+  /* fonts */
+  --heading-font-family: "adobe-clean", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --body-font-family: "adobe-clean", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* sizes  compact */
+  --body-font-size-m: 14px;
+  --body-font-size-s: 13px;
+  --body-font-size-xs: 12px;
+
+  --heading-font-size-xxl: 32px;
+  --heading-font-size-xl: 28px;
+  --heading-font-size-l: 22px;
+  --heading-font-size-m: 18px;
+  --heading-font-size-s: 16px;
+  --heading-font-size-xs: 14px;
+
+  /* layout */
+  --nav-height: 52px;
+  --section-max-width: 980px;
+  --section-padding: 3rem 1.5rem;
+}
+
+html, body { overflow: auto !important; }

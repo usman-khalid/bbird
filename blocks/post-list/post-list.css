@@ -1,0 +1,168 @@
+/* ============================================================
+   post-list block
+   All rules scoped under .post-list
+   ============================================================ */
+
+/* ---------- Filter tabs ---------- */
+
+.post-list .post-list-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+
+.post-list .post-filter {
+  font-size: 12px;
+  padding: 6px 14px;
+  border: 0.5px solid var(--border-3);
+  border-radius: 6px;
+  color: var(--fg-2);
+  cursor: pointer;
+  background: transparent;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.post-list .post-filter:hover,
+.post-list .post-filter.active {
+  border-color: var(--fg-3);
+  color: var(--fg);
+}
+
+/* ---------- Featured post ---------- */
+
+.post-list .post-featured {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: 0.5px solid var(--border-2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  background: var(--bg-2);
+  margin-bottom: 1.5rem;
+  transition: border-color 0.15s;
+}
+
+.post-list .post-featured:hover {
+  border-color: var(--border-3);
+}
+
+.post-list .post-featured .post-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.post-list .post-featured h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--fg);
+}
+
+.post-list .post-featured .post-excerpt {
+  font-size: 14px;
+  color: var(--fg-3);
+  line-height: 1.6;
+  margin: 0 0 1rem;
+}
+
+/* ---------- Post rows ---------- */
+
+.post-list .post-row {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem 0;
+  border-bottom: 0.5px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s;
+}
+
+.post-list .post-row:hover {
+  background: var(--bg-2);
+}
+
+.post-list .post-row-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.post-list .post-row .post-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.post-list .post-row .post-date {
+  font-size: 11px;
+  color: var(--fg-4);
+}
+
+.post-list .post-row h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: var(--fg);
+}
+
+.post-list .post-row .post-excerpt {
+  font-size: 13px;
+  color: var(--fg-3);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---------- Author ---------- */
+
+.post-list .post-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--fg-4);
+}
+
+.post-list .post-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-5);
+  color: #26215c;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ---------- Empty / error states ---------- */
+
+.post-list .post-list-empty,
+.post-list .post-list-error {
+  font-size: 13px;
+  color: var(--fg-4);
+  padding: 1rem 0;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 720px) {
+  .post-list .post-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .post-list .post-row .post-author {
+    display: none;
+  }
+}
