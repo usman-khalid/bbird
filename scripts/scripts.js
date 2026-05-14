@@ -114,6 +114,31 @@ function decorateButtons(main) {
 }
 
 /**
+ * Reads section-metadata blocks and applies key-value pairs to the parent section.
+ * The "style" key adds space-separated CSS class names to the section.
+ * Hides the section-metadata block after processing.
+ * @param {Element} main The main element
+ */
+function decorateSectionMetadata(main) {
+  main.querySelectorAll('.section-metadata').forEach((block) => {
+    const section = block.closest('.section');
+    if (!section) return;
+    [...block.children].forEach((row) => {
+      const key = row.children[0]?.textContent?.trim().toLowerCase();
+      const value = row.children[1]?.textContent?.trim();
+      if (key === 'style' && value) {
+        value.split(',').map((s) => s.trim()).filter(Boolean).forEach((cls) => {
+          section.classList.add(cls);
+        });
+      } else if (key && value) {
+        section.dataset[key] = value;
+      }
+    });
+    block.style.display = 'none';
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -124,6 +149,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  decorateSectionMetadata(main);
 }
 
 /**
@@ -132,6 +158,11 @@ export function decorateMain(main) {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
+  // Apply saved theme before render to avoid flash
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    document.documentElement.classList.add(savedTheme);
+  }
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
