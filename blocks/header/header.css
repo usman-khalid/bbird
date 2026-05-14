@@ -193,6 +193,37 @@
   color: var(--fg-3);
 }
 
+/* ----- theme toggle --------------------------------------- */
+.header nav#nav .nav-tools {
+  gap: 12px;
+}
+
+.header .theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0.5px solid var(--border-3);
+  border-radius: 6px;
+  color: var(--fg-4);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.header .theme-toggle:hover {
+  color: var(--fg);
+  border-color: var(--fg-4);
+}
+
+.header .theme-toggle svg {
+  width: 14px;
+  height: 14px;
+}
+
 /* ----- hamburger ------------------------------------------ */
 .header nav#nav .nav-hamburger {
   display: flex;

@@ -164,6 +164,37 @@ export default async function decorate(block) {
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
+  // theme toggle
+  const navTools = nav.querySelector('.nav-tools');
+  if (navTools) {
+    const toggle = document.createElement('button');
+    toggle.className = 'theme-toggle';
+    toggle.setAttribute('aria-label', 'Toggle color scheme');
+    toggle.type = 'button';
+
+    const sunSVG = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
+    const moonSVG = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.36 9.2A5.5 5.5 0 0 1 6.8 2.64a5.5 5.5 0 1 0 6.56 6.56Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    function applyTheme(theme) {
+      document.documentElement.classList.remove('light', 'dark');
+      document.documentElement.classList.add(theme);
+      toggle.innerHTML = theme === 'dark' ? sunSVG : moonSVG;
+      toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      localStorage.setItem('theme', theme);
+    }
+
+    const stored = localStorage.getItem('theme');
+    const preferred = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    applyTheme(stored || preferred);
+
+    toggle.addEventListener('click', () => {
+      const current = document.documentElement.classList.contains('light') ? 'light' : 'dark';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    navTools.appendChild(toggle);
+  }
+
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);

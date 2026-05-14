@@ -14,7 +14,7 @@
 
 .schedule .schedule-card.featured {
   border-color: var(--accent);
-  background: rgba(184, 92, 28, 0.08);
+  background: rgba(146, 86, 217, 0.08);
 }
 
 .schedule .schedule-card-header {
@@ -89,7 +89,7 @@
 }
 
 .schedule .schedule-btn.primary:hover {
-  background: #d06b22;
+  background: var(--accent-hover);
 }
 
 @media (max-width: 720px) {
