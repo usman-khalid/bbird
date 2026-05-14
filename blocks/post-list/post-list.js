@@ -8,42 +8,22 @@ const categoryColors = {
 };
 
 export default async function decorate(block) {
-  // 1. Read config
-  const config = {};
-  [...block.children].forEach((row) => {
-    const key = row.children[0]?.textContent?.trim().toLowerCase();
-    const val = row.children[1]?.textContent?.trim();
-    if (key && val) config[key] = val;
-  });
-  const source = config.source || '/writing';
-  const limit = parseInt(config.limit, 10) || 20;
+  block.textContent = '';
 
-  // 2. Fetch query-index
-  let posts = [];
+  let posts;
   try {
-    const resp = await fetch(`${source}/query-index.json`);
+    const resp = await fetch('/writing/query-index.json');
     const json = await resp.json();
     posts = (json.data || [])
-      .filter((p) => p.path.startsWith(`${source}/`))
-      .sort((a, b) => b.lastModified - a.lastModified)
-      .slice(0, limit);
-  } catch (e) {
-    block.textContent = '';
-    const err = document.createElement('p');
-    err.className = 'post-list-error';
-    err.textContent = 'Failed to load posts.';
-    block.appendChild(err);
+      .filter((p) => p.path !== '/writing')
+      .sort((a, b) => (b.lastModified || 0) - (a.lastModified || 0));
+  } catch {
+    block.innerHTML = '<p class="post-list-empty">Failed to load posts.</p>';
     return;
   }
 
-  // 3. Clear block
-  block.textContent = '';
-
   if (!posts.length) {
-    const empty = document.createElement('p');
-    empty.className = 'post-list-empty';
-    empty.textContent = 'No posts found.';
-    block.appendChild(empty);
+    block.innerHTML = '<p class="post-list-empty">No posts yet.</p>';
     return;
   }
 
@@ -60,33 +40,22 @@ export default async function decorate(block) {
 
   const allBtn = document.createElement('button');
   allBtn.className = 'post-filter active';
-  allBtn.textContent = `All · ${posts.length}`;
+  allBtn.textContent = `All \u00b7 ${posts.length}`;
   allBtn.dataset.category = '';
   filters.appendChild(allBtn);
 
   Object.entries(categories).forEach(([cat, count]) => {
     const btn = document.createElement('button');
     btn.className = 'post-filter';
-    btn.textContent = `${cat} · ${count}`;
+    btn.textContent = `${cat} \u00b7 ${count}`;
     btn.dataset.category = cat;
     filters.appendChild(btn);
   });
-
   block.appendChild(filters);
 
   // Posts container
   const container = document.createElement('div');
   container.className = 'post-list-items';
-
-  function getInitials(author) {
-    return (author || 'BB')
-      .split(' ')
-      .filter(Boolean)
-      .map((w) => w[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2);
-  }
 
   function renderPosts(filterCat) {
     container.textContent = '';
@@ -101,52 +70,35 @@ export default async function decorate(block) {
 
       const cat = (post.category || 'Uncategorized').trim();
       const colorVar = categoryColors[cat.toLowerCase()] || 'var(--fg-4)';
-      const initials = getInitials(post.author);
+      const initials = (post.author || 'BB').split(' ').map((w) => w[0]).join('').toUpperCase().slice(0, 2);
 
       if (i === 0 && !filterCat) {
-        // Featured card
         a.innerHTML = `
-          <div class="post-tag" style="color:${colorVar}">${cat} · ${post.date || ''}</div>
-          <h3>${post.title || ''}</h3>
+          <div class="post-tag" style="color:${colorVar}">${cat} \u00b7 ${post.date || ''}</div>
+          <h3>${post.title}</h3>
           <p class="post-excerpt">${post.description || ''}</p>
-          <div class="post-author">
-            <span class="post-avatar">${initials}</span>
-            <span>${post.author || ''}</span>
-          </div>
+          <div class="post-author"><span class="post-avatar">${initials}</span><span>${post.author || ''}</span></div>
         `;
       } else {
-        // Row format
         a.innerHTML = `
           <div class="post-row-meta">
             <span class="post-tag" style="color:${colorVar}">${cat}</span>
             <span class="post-date">${post.date || ''}</span>
           </div>
           <div class="post-row-content">
-            <h3>${post.title || ''}</h3>
+            <h3>${post.title}</h3>
             <p class="post-excerpt">${post.description || ''}</p>
           </div>
-          <div class="post-author">
-            <span class="post-avatar">${initials}</span>
-            <span>${post.author || ''}</span>
-          </div>
+          <div class="post-author"><span class="post-avatar">${initials}</span><span>${post.author || ''}</span></div>
         `;
       }
-
       container.appendChild(a);
     });
-
-    if (!filtered.length) {
-      const empty = document.createElement('p');
-      empty.className = 'post-list-empty';
-      empty.textContent = 'No posts in this category.';
-      container.appendChild(empty);
-    }
   }
 
   renderPosts(null);
   block.appendChild(container);
 
-  // Filter click handling
   filters.addEventListener('click', (e) => {
     const btn = e.target.closest('.post-filter');
     if (!btn) return;

@@ -97,13 +97,35 @@ input, textarea, select, button {
 
 /* links */
 a:any-link {
-  color: inherit;
-  text-decoration: none;
+  color: var(--link-color);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--link-color) 40%, transparent);
+  text-underline-offset: 2px;
   overflow-wrap: break-word;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 
 a:hover {
-  color: var(--accent);
+  color: var(--link-hover-color);
+  text-decoration-color: var(--link-hover-color);
+}
+
+/* Nav, footer, buttons  no underline */
+header a:any-link,
+footer a:any-link,
+a.button:any-link {
+  text-decoration: none;
+}
+
+/* Headings with links inherit heading color */
+h1 a:any-link, h2 a:any-link, h3 a:any-link,
+h4 a:any-link, h5 a:any-link, h6 a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover {
+  color: var(--link-color);
 }
 
 /* buttons */
@@ -258,6 +280,61 @@ main .section.light {
   justify-content: space-between;
   align-items: baseline;
   margin-bottom: 0.5rem;
+}
+
+/* ---- Section background styles (via section-metadata `style` field) ---- */
+
+/* Glow  subtle radial accent glow */
+main .section.glow {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 70%),
+    var(--bg);
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+}
+
+/* Ember  warm diagonal gradient */
+main .section.ember {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, var(--bg)) 0%, var(--bg) 50%, color-mix(in srgb, var(--accent-2) 6%, var(--bg)) 100%);
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+}
+
+/* Midnight  deep blue-purple gradient */
+main .section.midnight {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--accent-4) 8%, var(--bg)) 0%, var(--bg) 40%, color-mix(in srgb, var(--accent) 6%, var(--bg)) 100%);
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+}
+
+/* Surface  elevated surface with subtle depth */
+main .section.surface {
+  background: var(--bg-2);
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+}
+
+/* Mesh  multi-stop mesh gradient */
+main .section.mesh {
+  background:
+    radial-gradient(ellipse at 20% 50%, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, color-mix(in srgb, var(--accent-4) 6%, transparent) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, color-mix(in srgb, var(--accent-3) 5%, transparent) 0%, transparent 50%),
+    var(--bg);
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+}
+
+/* All gradient sections get extra padding */
+main .section.glow,
+main .section.ember,
+main .section.midnight,
+main .section.surface,
+main .section.mesh {
+  margin: 0;
+  padding: 3rem 1.5rem;
 }
 
 /* responsive */
