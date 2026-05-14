@@ -21,7 +21,7 @@ export default async function decorate(block) {
   // 2. Fetch query-index
   let posts = [];
   try {
-    const resp = await fetch('/query-index.json');
+    const resp = await fetch(`${source}/query-index.json`);
     const json = await resp.json();
     posts = (json.data || [])
       .filter((p) => p.path.startsWith(`${source}/`))
