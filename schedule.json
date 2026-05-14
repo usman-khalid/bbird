@@ -15,7 +15,7 @@
       "city": "San Jose, CA",
       "date": "NOV 10, 2025",
       "status": "past",
-      "description": "At the mothership. The first Masterclass  a full-day deep dive with the EDS engineering team.",
+      "description": "At the mothership. The first Masterclass, a full-day deep dive with the EDS engineering team.",
       "registerUrl": "",
       "registerLabel": ""
     },
@@ -25,15 +25,15 @@
       "status": "next",
       "description": "Asia-Pacific edition. Hands-on workshops with simultaneous translation.",
       "registerUrl": "https://rockstar.adobeevents.com/en/masterclass",
-      "registerLabel": "Register —"
+      "registerLabel": "Register"
     },
     {
       "city": "New York City",
       "date": "SEP 18, 2026",
       "status": "upcoming",
-      "description": "East coast edition. Date and venue announced soon  get on the notify list to hear first.",
+      "description": "East coast edition. Date and venue announced soon. Get on the notify list to hear first.",
       "registerUrl": "https://rockstar.adobeevents.com/en/masterclass/register-nyc",
-      "registerLabel": "Notify me —"
+      "registerLabel": "Notify me"
     }
   ]
 }
