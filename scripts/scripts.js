@@ -127,33 +127,6 @@ export function decorateMain(main) {
 }
 
 /**
- * Applies section-metadata after all sections are loaded.
- * Called from loadLazy to ensure block content is available.
- */
-function applySectionMetadata() {
-  document.querySelectorAll('.section-metadata').forEach((block) => {
-    const section = block.closest('.section');
-    if (!section) return;
-    [...block.children].forEach((row) => {
-      const cells = row.querySelectorAll(':scope > div');
-      const key = cells[0]?.textContent?.trim().toLowerCase();
-      const value = cells[1]?.textContent?.trim();
-      if (key === 'style' && value) {
-        value.split(',').map((s) => s.trim()).filter(Boolean).forEach((cls) => {
-          section.classList.add(cls);
-        });
-      } else if (key && value) {
-        section.dataset[key] = value;
-      }
-    });
-    // Hide the section-metadata block
-    const wrapper = block.closest('.section-metadata-wrapper');
-    if (wrapper) wrapper.style.display = 'none';
-    block.style.display = 'none';
-  });
-}
-
-/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
@@ -191,9 +164,6 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
-
-  // Apply section-metadata styles after all sections are loaded
-  applySectionMetadata();
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
