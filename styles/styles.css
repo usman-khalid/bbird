@@ -182,27 +182,30 @@ button.button.accent:hover {
   color: #fff;
 }
 
-/* When two buttons are side by side, first is primary, second is secondary */
-p.button-container:first-of-type a.button:any-link {
+/* EDS pattern: strong > a = primary, em > a = secondary */
+/* strong-wrapped links get .primary from EDS decoration */
+a.button.primary:any-link {
   border-color: var(--accent);
   background-color: var(--accent);
   color: #fff;
 }
 
-p.button-container:first-of-type a.button:any-link:hover {
+a.button.primary:any-link:hover {
   background-color: var(--link-hover-color);
   border-color: var(--link-hover-color);
 }
 
-p.button-container + p.button-container a.button:any-link {
+/* em-wrapped links get .secondary from EDS decoration */
+a.button.secondary:any-link {
   border-color: var(--border-3);
   background-color: transparent;
   color: var(--fg-2);
 }
 
-p.button-container + p.button-container a.button:any-link:hover {
+a.button.secondary:any-link:hover {
   border-color: var(--fg-4);
   color: var(--fg);
+  background: transparent;
 }
 
 main img {
